@@ -6,7 +6,7 @@
 /*   By: dhawkgir <dhawkgir@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 21:55:58 by dhawkgir          #+#    #+#             */
-/*   Updated: 2021/11/30 20:02:31 by dhawkgir         ###   ########.fr       */
+/*   Updated: 2021/12/09 16:54:31 by dhawkgir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,8 @@ int	ft_printf(const char *fmt, ...)
 			ft_print(&flags, &arg);
 		}
 		else
-		{
-			ft_putchar_fd(*fmt++, STDOUT_FILENO);
-			flags.printlen++;
-		}
+			ft_putchar(*fmt++, &flags);
 	}
 	va_end(ap);
 	return(flags.printlen);
-}
-
-////////////////////////////////////
-////////////////////////////////////
-////////////////////////////////////
-#include <stdio.h>
-#define PRINT "Hello2 	1"
-int	main()
-{
-	printf("\nftprintlen: %d\n\n", ft_printf(PRINT));
-	printf("\nprintlen: %d\n", printf(PRINT));
-	return (0);
 }

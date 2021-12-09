@@ -21,16 +21,23 @@ void    ft_processor(t_flags *flags, t_args *arg)
             flags->arglen = 0;
 }
 
-void	ft_putchar(char c, t_flags *flags)
+void    ft_putnbr_unsigned(unsigned int number, char *base, t_flags *flags)
 {
-	write(1, &c, 1);
-    flags->printlen++;
+    if (number >= ft_strlen(base))
+        ft_putnbr_unsigned(number / ft_strlen(base), base, flags);
+    ft_putchar(base[number % ft_strlen(base)], flags);
 }
 
-void    ft_putstr(char *str, t_flags *flags, int n)
+void    ft_putaddr(unsigned long addr, int count, char *base, t_flags *flags)
 {
-    if(n == 0)
-        return ;
-    while (*str && n--)
-        ft_putchar(*str++, flags);
+    if (count == 0)
+        ft_putstr("0x", flags, -42);
+    if (addr >= ft_strlen(base))
+    {
+        ft_putaddr(addr / ft_strlen(base), ++count, base, flags);
+        ft_putaddr(addr % ft_strlen(base), ++count, base, flags);
+    }
+    else
+        ft_putchar(base[addr % ft_strlen(base)], flags);
 }
+

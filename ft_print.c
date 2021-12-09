@@ -8,6 +8,7 @@ static void ft_print_space(t_flags *flags, t_args *arg)
 		return ;
 	count = 0;
 	if (ft_search(flags->convertation, "sc%"))
+	{
 		if(!flags->zero && flags->precision < flags->arglen)
 			if(flags->precision >= 0)
 				count = flags->width - flags->precision;
@@ -15,7 +16,9 @@ static void ft_print_space(t_flags *flags, t_args *arg)
 				count = flags->width - flags->arglen;
 		else
 			count = flags->width - flags->arglen;
+	}
 	else
+	{
 		if (arg->integer < 0)
 			flags->width -= 1;
 		if (flags->convertation == 'p')
@@ -24,6 +27,7 @@ static void ft_print_space(t_flags *flags, t_args *arg)
 			count = flags->width - flags->precision;
 		else
 			count = flags->width - flags->arglen;
+	}
 	while (count-- > 0)
 		ft_putchar(' ', flags);
 }
@@ -46,7 +50,6 @@ static void ft_print_prefix(t_flags *flags, t_args *arg)
 		if (flags->convertation == 'X')
 			ft_putstr("0X", flags, -42);
 	}
-	
 }
 
 static void ft_print_zero(t_flags *flags, t_args *arg)
@@ -82,14 +85,13 @@ static void	ft_print_arg(t_flags *flags, t_args *arg)
 	else if (flags->convertation == '%')
 		ft_putchar('%', flags);
 	else if (flags->convertation == 'u' && !(arg->integer == 0 && flags->precision == 0))
-		ft_putnbr_unsigned(arg->integer, "0123456789", flags);
+		ft_putnbr_unsigned(arg->integer, arg->base, flags);
 	else if (flags->convertation == 'x' && !(arg->integer == 0 && flags->precision == 0))
-		ft_putnbr_unsigned(arg->integer, "0123456789abcdef", flags);
+		ft_putnbr_unsigned(arg->integer, arg->base, flags);
 	else if (flags->convertation == 'X' && !(arg->integer == 0 && flags->precision == 0))
-		ft_putnbr_unsigned(arg->integer, "0123456789ABCDEF", flags);
+		ft_putnbr_unsigned(arg->integer, arg->base, flags);
 	else if (flags->convertation == 'p')
-		ft_putaddr(arg->integer, 0,)
-	
+		ft_putaddr(arg->integer, 0, arg->base, flags);
 }
 
 void    ft_print(t_flags *flags, t_args *arg)
