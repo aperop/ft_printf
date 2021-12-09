@@ -1,10 +1,10 @@
 NAME = libftprintf.a
 
-SRCS =	ft_lib.c	\
-		ft_parse.c	\
+SRCS =	ft_parse.c	\
 		ft_printf.c	\
 		ft_utils.c	\
 		ft_utils2.c	\
+		ft_utils3.c	\
 		ft_print.c
 
 INCLS = ft_printf.h
